@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TriviaNight</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+    <h3 id = "question" ></h3>
+    <p id = "wrongAnswer"></p>
+    <p id = "goodAnswer" ></p>
+    <script type="text/javascript">
+$.get("https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple", function(res) {
+            $('#question').html("<h1>" + res.results[0].question + "<h1>");
+            $('#wrongAnswer').html("<h2>" + res.results[0].incorrect_answers + "<h2>");
+            $('#goodAnswer').html("<h2>" + res.results[0].correct_answer + "<h2>")
+            });
+        </script>
+        	<div>
+                    <button><a href="javascript:location.reload(true)"href="javascript:location.reload(true)">Next Question</a> </button>
+                </div>
+</html>

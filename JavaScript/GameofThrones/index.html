@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game of Thrones</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        main {width:60%; margin: auto;font-family: Game of Thrones}
+        img {width: 23%; cursor: pointer;}
+        #selectImage {margin-left:10px;}        
+        #houseInfo {border: 1px solid #000; padding:10px;margin:0px;}
+        h3 {text-align: left; background: color black; padding:12px 0px;margin:0px;}
+        h4 {padding: 10px 15px;}
+    </style>
+</head>
+<body>
+    <main>
+        <div id="selectImage">                       
+            <img class="houseImage" imageID="17" src="images/baratheon.png" alt="baratheon">
+            <img class="houseImage" imageID="229" src="images/lannister.jpg" alt="lannister">
+            <img class="houseImage" imageID="362" src="images/stark.jpg" alt="stark">
+            <img class="houseImage" imageID="378" src="images/targaryen.jpg" alt="targaryen">
+        </div>
+        <div id="houseDetails">
+            <h3>House Details</h3>
+            <h4 id="info-name">Name:</h4>
+            <h4 id="info-words">Words:</h4>
+            <h4 id="info-titles">Titles:</h4>
+            <h4 id="info-founded">Founded:</h4>
+            <h4 id="info-ancestralWeapons">Ancestral Weapons:</h4>
+        </div>
+    </main>
+
+    <script>
+        $('.houseImage').click(function(){
+            var id = $(this).attr('imageID');
+            var url = "https://anapioficeandfire.com/api/houses/" + id;
+            $.get(url, function(data){
+                $('#info-name').text("Name: " + data.name);
+                $('#info-words').text("Words: " + data.words);
+                $('#info-titles').text("Titles: " + data.titles);
+                $('#info-founded').text("Founded: " + data.founded);
+                $('#info-ancestralWeapons').text("Ancestral Weapons: " + data.ancestralWeapons);
+            });            
+        });    
+        
+    </script>
+</body>
+</html>
