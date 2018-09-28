@@ -1,0 +1,932 @@
+{% extends 'base.html' %}
+{% block mainContent %}
+{% block navBar %}
+	{% include "includes/navbar.html" %}
+
+	{% endblock %}
+	<div class='container'>
+
+			<section id="wizard">
+			  <!-- <div class="page-header">
+	            <h1>Wizard With Custom Tabs Example</h1>
+	          </div> -->
+				<div id="rootwizard">
+                    <form role="form" id="submitForm" class="form-horizontal" action="{% url 'users:submit_form' %}" enctype="multipart/form-data" method="post">
+						{% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-4 ">
+                                <label class='control-label' for="firstName">First Name / Nombre </label>
+									  <div class="form-group form-inline required">
+									    <input type="text" required="required" name="{{employeeForm.first_name.name}}"
+									    class="form-control" id="FirstName" placeholder="First Name"
+									    value="">
+									  </div>
+                            </div>
+								<div class="col-md-4 ">
+                                <label class='control-label' for="lastName">Last Name / Apellido </label>
+									 <div class="form-group form-inline required">
+									    <input type="text" required="required" name="{{employeeForm.last_name.name}}"
+									    class="form-control" id="lastName" placeholder="Last Name" value="">
+									  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+
+                    <label class='control-label' for="phoneNumber">Phone Number / Teléfono </label>
+                  <div class="form-group form-inline required">
+                    <input type="text" required="required" class="form-control bfh-phone"
+                    id="phoneNumber" data-country="US" name="{{employeeForm.phoneNumber.name}}" value="" minlength="17">
+                  </div>
+              </div>
+            </div>
+                            <div class="col-md-4 ">
+                                <label class='control-label' for="lastName">Gender / Sexo </label>
+									 <div class="form-group form-inline required">
+									    {% for choice in employeeForm.gender %}
+                                        {{ choice }}
+                                       {% endfor %}
+									  </div>
+								</div>
+									<div class="col-md-4">
+                                        <label for="dateOfBirth">Date of Birth / Fecha de Nacimiento </label>
+									  <div class="form-group form-inline">
+							                <div class='input-group date' id='datepicker'>
+							                    <input type='date' class="form-control" name="{{employeeForm.dateOFBirth.name}}" value=""  required/>
+							                    <span class="input-group-addon">
+							                        <span class="glyphicon glyphicon-calendar"></span>
+							                    </span>
+							                </div>
+						            	</div>
+					           		 </div>
+							 </div>
+                        <div class="row">
+								  <div class="form-group col-md-11 required">
+                                  <label>Home Address / Direccion </label>
+								    <input type="text" name="{{employeeForm.home_address1.name}}"
+								    class="form-control" id="streetAddress1" placeholder="Home Address 1"value=""
+								    required="required">
+                                  </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-11 required">
+                                    <input type="text" name="{{employeeForm.home_address2.name}}"
+							    class="form-control" id="homeAddress2" placeholder="Home Address 2"value="">
+                                </div>
+                        </div>
+                    <div class="row">
+					      	  	<div class="col-md-4">
+									  <div class="form-group form-inline required">
+									    <input type="text" name="{{employeeForm.postCode.name}}"
+									    class="form-control" id="postalCode" placeholder="Postal/Zip Code"value="" required="required">
+									  </div>
+								</div>
+                                <div class="col-md-4" id="ziperror">
+
+                                </div>
+                        </div>
+                    <div class="row">
+					      	  	<div class="col-md-4">
+									  <div class="form-group form-inline required">
+									    <input type="text" name="{{employeeForm.city.name}}"  class="form-control"
+									    id="city" placeholder="City Name" value=""
+									   	required="required">
+									  </div>
+								</div>
+								<div class="col-md-4 ">
+									 <div class="form-group form-inline">
+                                    <label>State / Estado </label>
+									   	<select id="state" required placeholder="State/Province"  name="{{employeeForm.state.name}}"
+									   	class="form-control bfh-states" data-country="US" data-state="FL"></select>
+									  </div>
+								</div>
+							 </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                            <label>Marital Status / Estado Civil </label>
+									 <div class="form-group form-inline">
+									   {% for choice in employeeForm.Marital_status %}
+                                        {{ choice }}
+                                       {% endfor %}
+									  </div>
+								</div>
+                        </div>
+                    <div class="row">
+					      	  	<div class="col-md-6">
+
+									    <label for="email">Email:</label>
+									  <div class="form-group form-inline">
+									    <input type="email" class="form-control" id="email" name="{{employeeForm.email.name}}" value="" placeholder="Email Address">
+									  </div>
+								</div>
+							</div>
+								<div class="col-md-4">
+
+									    <label class='control-label' for="socialNumber">Social Security Number or ITIN:</label>
+									  <div class="form-group form-inline required">
+									    <input minlength="9" maxlength="9" type="text" required="required" name="{{employeeForm.socialSecurityNumber.name}}"
+									    class="form-control" id="number" placeholder="XXX-XX-XXXX" value="">
+                                          <label class='control-label'>We need SSN if you will work as an employee or ITIN if you will work as an independent contractor.</label>
+									  </div>
+								</div>
+							</div>
+                    <div class="row">
+							  	<div class="col-md-8">
+
+									    <label>Numbers of year of experience in Construction Work/Años de experiencia en trabajos de construcción?</label>
+								   <div class="form-group form-inline">
+									    <input required type="number" name="{{employeeForm.no_year_experience.name}}" value="" class="form-control" id="experience" >
+									</div>
+								</div>
+							 </div>
+
+
+							 <div class="row">
+							  	<div class="col-md-8">
+
+									    <label>Numbers of Dependents</label>
+									<label>Número de Dependientes</label>
+								   <div class="form-group form-inline">
+									    <input type="number" name="{{employeeForm.no_of_dependents.name}}"
+									    value=""class="form-control" id="dependents" required>
+									</div>
+								</div>
+							 </div>
+                    <div class="row"><div class="col-md-4">
+                                <label>Emergency Contact / Contacto de Emergencia</label></div></div>
+                    <div class="row">
+					      	  	<div class="col-md-4">
+
+									    <label for="contactName">First Name / Nombre</label>
+									  <div class="form-group form-inline">
+									    <input type="text" class="form-control"
+									    name="{{employeeForm.emergency_contact_firstName.name}}"value="" required>
+									  </div>
+								</div>
+
+								<div class="col-md-4">
+									    <label for="contactLastName">Last Name / Apellido</label>
+									  <div class="form-group form-inline">
+									    <input type="text" class="form-control" name="{{employeeForm.emergency_contact_lastName.name}}"
+									    value="" required>
+									  </div>
+								</div>
+
+								<div class="col-md-4">
+									    <label for="relation">Relation / Relación</label>
+									  <div class="form-group form-inline">
+									    <input type="text" class="form-control" name="{{employeeForm.emergency_contact_relation.name}}"
+									    value="" required>
+									  </div>
+								</div>
+							</div>
+                    <div class="row">
+					      	  	<div class="col-md-4">
+
+									    <label for="contactNumber">Phone Number / Teléfono</label>
+									  <div class="form-group form-inline">
+									    <input type="text" class="form-control bfh-phone" id="contactNumber"
+									    data-country="US" name="{{employeeForm.emergency_contact_phoneNumber.name}} "value="" required>
+									  </div>
+								</div>
+                    </div>
+                    <div class="col-md-12">
+                        <h3>Job Skills - I currently have experience in the following job skills:</h3>
+                        <span>(Please check all  those which apply)</span>
+                    </div>
+							      <div class="row">
+									 <div class="col-md-4">
+									      <div class="checkbox">
+									        <label>
+									          <input type="checkbox" name="{{ employeeForm.ceiling_mechanic.name }}"
+									           {% if employeeForm.ceiling_mechanic.value %} value="{{employeeForm.ceiling_mechanic.value}}" {% endif %}> Acoustical Ceiling Mechanic / Mecánico de techo acústico
+									        </label>
+									      </div>
+								  </div>
+                                  </div>
+								  <div class="row">
+									 <div class="col-md-4">
+									      <div class="checkbox">
+									        <label>
+									          <input type="checkbox" name="{{ employeeForm.framing_mechanic.name }}"
+									          {% if employeeForm.framing_mechanic.value %}
+									          value="{{employeeForm.framing_mechanic.value}}" {% endif %} >
+									          Drywall Metal Framing Mechanic / Mecánico estructura metal
+									        </label>
+									      </div>
+								  	</div>
+								  </div>
+
+								  <div class="row">
+									 <div class="col-md-4">
+									      <div class="checkbox">
+									        <label>
+									          <input type="checkbox" name="{{ employeeForm.drywall_hanger.name }}"
+									           {% if employeeForm.drywall_hanger.value %}
+									          value="{{employeeForm.drywall_hanger.value}}"
+									          {% endif %}>Drywall Hanger / Suspensión de paneles de yeso
+									        </label>
+									      </div>
+								  	</div>
+								  </div>
+								  <div class="row">
+									 <div class="col-md-4">
+									      <div class="checkbox">
+									        <label>
+									          <input type="checkbox" name="{{ employeeForm.drywall_finisher.name }}"
+									          {% if employeeForm.ddrywall_finisher.value %}
+									           value="{{ employeeForm.drywall_finisher.value }}"
+									          {% endif %}>Drywall Finisher / Finalizador de paneles de yeso
+									        </label>
+									      </div>
+								  	</div>
+								  </div>
+								  <div class="row">
+									 <div class="col-md-4">
+									      <div class="checkbox">
+									        <label>
+									          <input type="checkbox"  name="{{ employeeForm.general_larborer.name }}"
+									          {% if employeeForm.general_larborer.value %}
+								           		value="{{ employeeForm.general_larborer.value }}"
+								          		{% endif %}>General Laborer / Trabajador general
+									        </label>
+									      </div>
+								  	</div>
+								  </div>
+								  <div class="row">
+									 <div class="col-md-4">
+									      <div class="checkbox">
+									        <label>
+									          <input type="checkbox"  name="{{ employeeForm.painter_tradesman.name }}"
+									           {% if employeeForm.painter_tradesman.value %}
+								           		value="{{ employeeForm.painter_tradesman.value }}"
+								          		{% endif %}>
+									          Painter Tradesman / Pintor
+									        </label>
+									      </div>
+								  	</div>
+								  </div>
+								  <div class="row">
+									 <div class="col-md-4">
+									      <div class="checkbox">
+									        <label>
+									          <input type="checkbox"  name="{{ employeeForm.plaster_tradesman.name }}"
+									          {% if employeeForm.plaster_tradesman.value %}
+								           		value="{{ employeeForm.plaster_tradesman.value }}"
+								          		{% endif %}>Plaster Tradesman / Trabajador de yeso
+									        </label>
+									      </div>
+								  	</div>
+								  </div>
+
+							<div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.masonry_blocklayer.name }}"
+
+										          {% if employeeForm.masonry_blocklayer.value %}
+									           		value="{{ employeeForm.masonry_blocklayer.value }}"
+									          		{% endif %}>
+										          Masonry Blocklayer / Capa de bloque de mampostería
+										        </label>
+										      </div>
+									  	</div>
+								  	</div>
+								  	<div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.masonry_bricklayer.name }}"
+
+										           {% if employeeForm.masonry_bricklayer.value %}
+									           		value="{{ employeeForm.masonry_bricklayer.value }}"
+									          		{% endif %}>Masonry Bricklayer / Capa de ladrillo
+										        </label>
+										      </div>
+									  	</div>
+								  	</div>
+								  	<div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.carpenter.name }}"
+										          {% if employeeForm.carpenter.value %}
+									           		value="{{ employeeForm.carpenter.value }}"
+									          		{% endif %}>
+										          Carpenter General / Carpintero General
+										        </label>
+										      </div>
+									  	</div>
+								  	</div>
+								  	<div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.concrete_forming.name }}"
+										           {% if employeeForm.concrete_forming.value %}
+									           		value="{{ employeeForm.concrete_forming.value }}"
+									          		{% endif %} >
+										          Concrete Forming / Formación de Concreto
+										        </label>
+										      </div>
+									  	</div>
+								  	</div>
+								  	<div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.concrete_finisher.name }}"
+										          {% if employeeForm.concrete_finisher.value %}
+									           		value="{{ employeeForm.concrete_finisher.value }}"
+									          		{% endif %} >
+										          Concrete Finisher / Acabado en Concreto
+										        </label>
+										      </div>
+									  	</div>
+								  	</div>
+								  	<div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.osha_manager.name }}"
+										          {% if employeeForm.osha_manager.value %}
+									           		value="{{ employeeForm.osha_manager.value }}"
+									          		{% endif %} >
+										          OSHA Manager / OSHA Manager
+										        </label>
+										      </div>
+									  	</div>
+								  	</div>
+
+								  	<div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.project_manager.name }}"
+										          {% if employeeForm.project_manager.value %}
+									           		value="{{ employeeForm.project_manager.value }}"
+									          		{% endif %}>
+										          Project Manager / Foreman
+										        </label>
+										      </div>
+									  	</div>
+								  	</div>
+                    <div class="col-md-12">
+							<h3>Job Skills - I currently have experience in the following job skills:</h3>
+							<span>(Please check all  those which apply)</span>
+                    </div>
+									 <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_ladder_user.name }}"
+										          {% if employeeForm.is_ladder_user.value %}
+									           		value="{{ employeeForm.is_ladder_user.value }}"
+									          		{% endif %}>Are you skilled or trained in the user of a ladder? / Eres hábil en el uso de una escalera?
+										        </label>
+										      </div>
+									  	</div>
+								  	</div>
+								  	<div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_wheelbrrow_user.name }}"
+										          {% if employeeForm.is_wheelbrrow_user.value %}
+									           		value="{{ employeeForm.is_wheelbrrow_user.value }}"
+									          		{% endif %}>Are you skilled in the use of a Wheelbarrow? / Eres hábil en el uso de una carretilla?
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_general_hand_tools.name }}"
+										          {% if employeeForm.is_general_hand_tools.value %}
+									           		value="{{ employeeForm.is_general_hand_tools.value }}"
+									          		{% endif %}>Are you skilled in the use of general hand tools? / Eres hábil en el uso de herramientas manuales?
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_walking_slits.name }}"
+										          {% if employeeForm.is_walking_slits.value %}
+									           		value="{{ employeeForm.is_walking_slits.value }}"
+									          		{% endif %}>Are you skilled in the use of walking stilts? / Eres hábil en el uso de zancos para caminar?
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_electric_screw_gun.name }}"
+										         {% if employeeForm.is_electric_screw_gun.value %}
+									           		value="{{ employeeForm.is_electric_screw_gun.value }}"
+									          		{% endif %} >Are you skilled in the use of an electric screw gun? / Eres hábil en el uso de una pistola de tornillo eléctrica?
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_electric_chop_saw.name }}"
+										          {% if employeeForm.is_electric_chop_saw.value %}
+									           		value="{{ employeeForm.is_electric_chop_saw.value }}"
+									          		{% endif %}>Are you skilled in the use of an electric chop saw? / Eres hábil en el uso de una sierra de corte eléctrica?
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_power_nail_gun.name }}"
+										          {% if employeeForm.is_power_nail_gun.value %}
+									           		value="{{ employeeForm.is_power_nail_gun.value }}"
+									          		{% endif %}>Are you skilled in the use of power actuators (nail gun)? / Eres hábil en el uso de una pistola de clavos?
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_wallboard_hoist.name }}"
+										          {% if employeeForm.is_wallboard_hoist.value %}
+									           		value="{{ employeeForm.is_wallboard_hoist.value }}"
+									          		{% endif %}>Are you skilled in the use of wallboard hoist? / Eres hábil en el uso de polipasto de pared?
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_scissor_lift.name }}"
+										          {% if employeeForm.is_scissor_lift.value %}
+									           		value="{{ employeeForm.is_scissor_lift.value }}"
+									          		{% endif %}>Are you skilled in the use of scissor lift? / Eres experto en el uso de tijera Lift?
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+
+								  	   <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_boom_lift.name }}"
+										          {% if employeeForm.is_boom_lift.value %}
+									           		value="{{ employeeForm.is_boom_lift.value }}"
+									          		{% endif %}>Are you skilled in the use of boom lift? / Eres hábil en el uso de la pluma de elevación?
+									          	</label>
+										      </div>
+									  	</div>
+								  	  </div>
+
+								  	   <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_bucket_truck_lift.name }}"
+										          {% if employeeForm.is_bucket_truck_lift.value %}
+									           		value="{{ employeeForm.is_bucket_truck_lift.value }}"
+									          		{% endif %}>Are you skilled in the use of bucket truck lift? / Eres hábil en el uso del elevador de camión cuchara?
+									          	</label>
+										      </div>
+									  	</div>
+								  	  </div>
+
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{ employeeForm.is_new_skill.name }}"
+										          {% if employeeForm.is_new_skill.value %}
+									           		value="{{ employeeForm.is_new_skill.value }}"
+									          		{% endif %}>Are you willing to learn new skills as an apprentice? / Estás dispuesto a aprender nuevas habilidades como aprendiz?
+									          	</label>
+										      </div>
+									  	</div>
+								  	  </div>
+							<h3>Skills Certifications - I currently have the following skill Certifications:</h3>
+									 <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{employeeForm.is_osha10.name}}"
+									           {% if employeeForm.is_osha10.value %} value="{{employeeForm.is_osha10.value}}"
+									           {% endif %}>
+									           OSHA 10 Certification
+										        </label>
+										      </div>
+									  	</div>
+								  	</div>
+								  	<div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{employeeForm.is_osha30.name}}"
+									           {% if employeeForm.is_osha10.value %} value="{{employeeForm.is_osha10.value}}"
+									           {% endif %}>OSHA 30 Certification
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{employeeForm.is_osha_training_manager.name}}"
+									           {% if employeeForm.is_osha_training_manager.value %} value="{{employeeForm.is_osha_training_manager.value}}"
+									           {% endif %}>OSHA Training Manager Certification
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{employeeForm.is_power_tool_certified.name}}"
+									           {% if employeeForm.is_power_tool_certified.value %} value="{{employeeForm.is_power_tool_certified.value}}"
+									           {% endif %}>Power Tools Certifications / Herramientas de Corriente
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{employeeForm.is_hiltl.name}}"
+									           {% if employeeForm.is_hiltl.value %} value="{{employeeForm.is_hiltl.value}}"
+									           {% endif %}>HILTI Certification
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{employeeForm.is_ladder_user_certified.name}}"
+									           {% if employeeForm.is_ladder_user_certified.value %} value="{{employeeForm.is_ladder_user_certified.value}}"
+									           {% endif %}>Ladder User Certification / Escalera
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{employeeForm.is_scissor_lift_certified.name}}"
+									           {% if employeeForm.is_scissor_lift_certified.value %} value="{{employeeForm.is_scissor_lift_certified.value}}"
+									           {% endif %}>Scissor Lift Use Certificate / Tijera Lift
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+								  	  <div class="row">
+										 <div class="col-md-4">
+										      <div class="checkbox">
+										        <label>
+										          <input type="checkbox" name="{{employeeForm.is_broom_lift_certified.name}}"
+									           {% if employeeForm.is_broom_lift_certified.value %} value="{{employeeForm.is_broom_lift_certified.value}}"
+									           {% endif %}>Boom Lift Use Certificate / Pluma Lift
+										        </label>
+										      </div>
+									  	</div>
+								  	  </div>
+                    <div class="col-md-12">
+                    <h3>Please answer ALL questions with a YES or NO where indicated with a check</h3>
+                    </div>
+									 <div class="row">
+										 <div class="col-md-12">
+										      <div class="checkbox">
+										        <label>
+
+									           Have you ever been convicted of or pleaded no contest to a felony within the last five years?/
+									           <br>
+									           Alguna vez ha sido condenado o declarado inocente de un delito grave en los últimos cinco años?
+										       </label>
+										        <br>
+												  {% for choice in employeeForm.convicted_or_not %}
+												  <label>
+												  	{{choice}}
+												  </label>
+													{% endfor %}
+										      </div>
+									  	</div>
+								  	</div><br>
+								  	<div class="row">
+										 <div class="col-md-12">
+										      <div class="checkbox">
+										        <label>
+										         Are you able to provide proof of work eligibility in the United States?/
+										         <br>
+												 Puede proporcionar prueba de elegibilidad de trabajo en los Estados Unidos?
+
+										        </label>
+										        <br>
+										        {% for choice in employeeForm.allowed_in_usa %}
+												  <label>
+												  	{{choice}}
+												  </label>
+													{% endfor %}
+
+										      </div>
+									  	</div>
+								  	  </div><br>
+
+								  	 <!-- <div class="row">
+										 <div class="col-md-12">
+										      <div class="checkbox">
+										        <label>
+										          Are you able to provide proof of work eligibility in the United States?/
+										          <br>
+												 Puede proporcionar prueba de elegibilidad de trabajo en los Estados Unidos?
+										        </label>
+										        <br>
+										        {% for choice in employeeForm.work_eligible_usa %}
+												  <label>
+												  	{{choice}}
+												  </label>
+													{% endfor %}
+
+										      </div>
+									  	</div>
+								  	  </div><br>-->
+
+								  	  <div class="row">
+										 <div class="col-md-12">
+										      <div class="checkbox">
+										        <label>
+										          Are you able to provide your domicile address for the last 5 years?/
+										          <br>
+												  Puede proporcionar su dirección de domicilio durante los últimos 5 años?
+										        </label>
+										        <br>
+										        {% for choice in employeeForm.domicile_address %}
+												  <label>
+												  	{{choice}}
+												  </label>
+													{% endfor %}
+										      </div>
+									  	</div>
+								  	  </div>
+
+
+								  	  <div class="row">
+										 <div class="col-md-12">
+										      <div class="checkbox">
+										        <label>
+										          Have you ever been involved in a lawsuit with any previous employer?/
+										          <br>
+												  Alguna vez a estado involucrado en una demanda con cualquier empleador anterior?
+										        </label>
+										        <br>
+										        {% for choice in employeeForm.law_suite %}
+												  <label>
+												  	{{choice}}
+												  </label>
+													{% endfor %}
+
+										      </div>
+									  	</div>
+								  	  </div><br>
+
+
+								  	  <div class="row">
+										 <div class="col-md-12">
+										      <div class="checkbox">
+										        <label>
+										          Have you ever been involved in a Workers Compensation Claim?/
+										          <br>
+												 Alguna vez a estado involucrado en una Reclamación de Compensación de Trabajadores?
+										        </label>
+										        <br>
+										        {% for choice in employeeForm.compensation_claim %}
+												  <label>
+												  	{{choice}}
+												  </label>
+													{% endfor %}
+
+										      </div>
+									  	</div>
+								  	  </div><br>
+
+
+								  	  <div class="row">
+										 <div class="col-md-12">
+										      <div class="checkbox">
+										        <label>
+										         Are you willing to travel if there are qualified work positions in another city or state?/
+										          <br>
+												Estás dispuesto a viajar si hay puestos de trabajo calificados en otra ciudad o estado?
+										        </label>
+										        <br>
+										        {% for choice in employeeForm.other_city %}
+												  <label>
+												  	{{choice}}
+												  </label>
+													{% endfor %}
+
+										      </div>
+									  	</div>
+								  	  </div>
+                    <div class="col-md-12">
+                    <h3>Terms and Conditions: </h3>
+                        </div>
+							<div class="row">
+								<div class="col-md-4">
+                                    <textarea id="agreement" rows="15" cols="40" disabled>
+1.	I certify that all of the statements made in this questionnaire are made in good faith and these statements  are true and correct to the best of my knowledge. / Certifico que todas las declaraciones hechas en este cuestionario se hacen de buena fe y estas declaraciones son verdaderas y correctas al mejor de mi conocimiento
+
+2.	I understand that this questionnaire does not assure me of employment. Additionally, this questionnaire in no way obligates to hire me. If I am employed, I acknowledge that my employment, as an employee or independent contractor, will be an employment at will and that no specified time of employment is promised or implied. The company and I may terminate the relationship at will, at any time, so long as there is no violation of applicable federal, state laws, or contract rules. I further understand that this application does not constitute an agreement or contract for employment. I understand that if hired I may be charged up to $2.25 per week for check delivery and administration. / Entiendo que mi cuestionario no me asegura empleo. Además, este cuestionario de ninguna manera obliga a la compania contratarme. Si soy empleado, reconozco que mi empleo, como empleado o contratista independiente, será un empleo a voluntad y que el tiempo especificado no se promete. La compañia puede terminar la relación, en cualquier momento, siempre y cuando no haya una violación de las reglas de las leyes federales, estatales , o de contratos aplicables. Además, entiendo que esta cuestionario no constituye un acuerdo o contrato de trabajo. Entiendo que si me contratan, me pueden cobrar hasta $ 2.25 por semana por entrega y administración de cheques.
+
+3.	I understand that any misleading or incorrect statements or failure to complete any part of this questionnaire not prohibited by law may render this questionnaire void and would be a cause for immediate dismissal. / Entiendo que cualquier declaración engañosa o incorrecta usada para completar cualquier parte de esta cuestionario, que no esté prohibido por la ley pueden hacer que este vacía el cuestionario y sería un motivo de despido inmediato
+
+4.	I understand that the information provided in the information in the questionnaire will be retained for a period of one year following the date of submission. Where necessary, the company may require additional information or complete a new questionnaire to remain in consideration of employment after that time. / Entiendo que la información proporcionada en esta cuestionario se mantendrá por un período de un año, siguientes a la fecha de presentación. Cuando sea necesario, la empresa puede requerir información adicional o un cuestionario nuevo de permanencia en razón de un empleo después de ese tiempo
+
+5.	I provide permission to the company and all of the company’s agents and/or vendors the right to investigate all of the information provided as part of the questionnaire process, as well as, their requirements to secure additional information, if necessary. I further understand that this includes, but is not limited to, such activities as contacting my references or previous employers, employment screening, and conducting other employee background checking to verify my credential as a suitable independent contractor and/or employee for the company. I hereby release from all liability or responsibility all persons, companies, corporations, when furnishing such information. / Doy permiso a la compañia y todos los agentes de la empresa y/o proveedores el derecho de investigar toda la información proporcionada en el marco del proceso del cuestionario, así como, los requisitos para asegurar la información adicional, si es necesario. Además, entiendo que esto incluye, pero no está limitado a, actividades tales como ponerse en contacto con mis referencias o empleadores anteriores, la investigación del empleo, y la realización de otros antecedentes de los empleadores para verificar mi credencial como contratista independiente y/o empleado de la compañía. Yo libero de toda responsabilidad todas las personas, empresas, corporaciones, cuando SUMINISTREN dicha información
+
+6.	I understand that as an employee or independent contractor, I must be capable of the following essential functions and that I am qualified and capable to perform the functions required. / Entiendo que como un empleado o contratista independiente, debo ser capaz de realizar las siguientes funciones esenciales y que estoy cualificado y capacitado para llevar a cabo las funciones necesarias.
+a.	I understand that as an employee or independent contractor, I must be capable of the following essential functions and that I am qualified and capable to perform the functions required. / Entiendo que como un empleado o contratista independiente, debo ser capaz de realizar las siguientes funciones esenciales y que estoy cualificado y capacitado para llevar a cabo las funciones necesarias.
+
+b.	This may require bending, stretching, and physical use of muscles during walking, transportations, or general duties. / Esto puede requerir la flexión, estiramiento y uso físico de los músculos durante la marcha, los medios de transporte, o de funciones generales.
+                                    </textarea>
+						 		</div>
+                                </div>
+                    <div class="row">
+					     		<div class="col-md-12">
+					     			<h4>This Agreement is signed Date/Este acuerdo es firmado en la fecha: </h4>
+					     		</div>
+					     		<div class="col-md-4">
+					     			<div class='input-group date' id='agreementDate'>
+				                    <input disabled type='date' class="form-control" name="{{employeeForm.agreement_signed_date.name}}" value="{{ date }}" />
+				                    <span class="input-group-addon">
+				                        <span class="glyphicon glyphicon-calendar"></span>
+				                    </span>
+				                    </div>
+					     		</div>
+					     	</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row" style="margin-top: 15px;">
+										<div class="col-md-4">
+										<label>Your Signature here :</label>
+								      	</div>
+									</div>
+                                    <div class="row">
+                                        <div class="col-md-12" id="signature">
+											{{employeeForm.user_signature}}
+									    </div>
+                                    </div><br>
+                                    <div class="col-md-12">
+									<h4>Please Upload a copy of the following documents:</h4>
+									<h4>Por favor subir una copia de los siguientes documentos:</h4>
+                                    </div>
+										<div class="row" style="margin-top: 15px;">
+											<div class="col-md-4">
+											<label>Copy Of Driving License:</label>
+									      	</div>
+									      	<div class="col-md-4">
+												{{employeeForm.driver_license }}
+
+										    </div>
+										</div>
+                                        <div class="row">
+                                            <img class="{{ employeeForm.driver_license.auto_id }}" >
+                                        </div>
+
+										<div class="row" style="margin-top: 15px;">
+											<div class="col-md-4">
+											<label>Copy Of Social Securiy Card:</label>
+									      	</div>
+									      	<div class="col-md-4">
+												{{employeeForm.social_security_copy }}
+
+										    </div>
+
+										</div>
+                                        <div class="row">
+                                            <img class="{{ employeeForm.social_security_copy.auto_id }}" >
+                                        </div>
+
+										<div class="row" style="margin-top: 15px;">
+											<div class="col-md-4">
+											<label>Copy Of Certifications:</label>
+									      	</div>
+									      	<div class="col-md-4">
+												{{employeeForm.certification_copy }}
+
+										    </div>
+										</div>
+                                        <div class="row">
+                                            <img class="{{ employeeForm.certification_copy.auto_id }}" >
+                                        </div>
+
+										<div class="row" style="margin-top: 15px;">
+											<div class="col-md-4">
+											<label>Copy Of Resume and Work History:</label>
+									      	</div>
+									      	<div class="col-md-4">
+												{{employeeForm.resume_copy }}
+										    </div>
+
+										</div>
+                                        <div class="row">
+                                            <img class="{{ employeeForm.resume_copy.auto_id }}" >
+                                        </div>
+
+
+										<div class="row" style="margin-top: 15px;">
+											<div class="col-md-2">
+											<label>Notes and Comments:</label>
+									      	</div>
+									      	<div class="col-md-4">
+												<textarea name="{{employeeForm.comments_area.name}}"
+												class="form-control" rows="5" id="comment"></textarea>
+										    </div>
+                                            </div>
+                                    </div>
+								  	</div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                             <label><input type="checkbox" required id="accept"> Accept/Acepto</label>
+                            <h4>Make sure you read all terms and
+                            conditions before accepting and submitting. By clicking <b>Accept/Acepto</b>, you agree to the following all terms and conditions.</h4>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="row col-md-4">
+								  	  			<button type="submit" id="submit" class="btn btn-primary">Submit Form</button>
+								  	  		</div>
+                    </form>
+                </div>
+            </section>
+    </div>
+    <br><br><br>
+
+{% endblock %}
+
+{% block extraJs %}
+{{ employeeForm.media }}
+<script type='text/javascript'>
+	$(document).ready(function() {
+        function readURL(input) {
+            var ident = $(input).attr('id');
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.' + ident + '').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#id_driver_license").change(function () {
+            readURL(this);
+        });
+        $("#id_social_security_copy").change(function () {
+            readURL(this);
+        });
+        $("#id_certification_copy").change(function () {
+            readURL(this);
+        });
+        $("#id_resume_copy").change(function () {
+            readURL(this);
+        });
+
+        $('#number').usPhoneFormat({
+            format: 'xxx-xx-xxxx',
+        });
+    });
+</script>
+
+
+{% endblock %}

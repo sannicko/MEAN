@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trvia!</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
+    <script >
+            $(document).ready(function(){
+            $('#next').click(function() { 
+                $.get("https://opentdb.com/api.php?amount=10", displayName);
+            });
+            function displayName(data) {
+                console.log(data)
+                results = data.results;
+                for(let i = 0; i < results.length; i++){
+                    answers = results[i].incorrect_answers;
+                    answers.push(results[i].correct_answer);
+                    $('h1').append("<h4>" +results[i].question+ "</h4>")
+                    for(let j = 0; j < answers.length; j++){
+                        $('h1').append('<li>' + answers[j] + '</li>')
+                    }
+                }
+            }
+        });
+    </script>
+
+
+</head>
+
+<body>
+	<div>
+		<h1>Trivia Night</h1>
+	</div>
+	<div>
+		<button id="next">click to start the quiz</button>
+	</div>
+</body>
+	
+
+</html>

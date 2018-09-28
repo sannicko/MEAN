@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css" />
+</head>
+<body>
+    <h1>Details Page for <%= data.name %></h1>
+    <img src='<%=data.img_url%>' alt='cat'>
+    <h5>Favorite food: <%=data.favorite_food%></h5>
+    <h5>Age:<%=data.age%></h5>
+    <div>
+        <ul>
+            <h5>Sleeping spots:</h5>
+            <% for (var i in data.sleeping_spots){%>
+                <li><%=data.sleeping_spots[i]%></li>
+            <%}%>
+        </ul>
+    </div>
+</body>
+</html
