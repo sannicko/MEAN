@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+
+  <div id="wrapper">
+
+    <div id="errors">
+    </div>
+    <h2>Registration</h2>
+    <% if(messages.success) { %>
+      <h1>Succesfully Registered New User</h1>
+    <% } %>
+    <% if(messages.registration) { %>
+      <h3>Registration Error</h3>
+      <ul>
+        <% for (var x of messages.registration) { %>
+          <li style="color:red;"><%= x %></li>
+        <% } %>
+      </ul>
+    <% } %>
+          <form action="register" method="POST">
+            <ul>
+          	<p><label for ="f_name">First Name:</label><input type="text" name="f_name" id="f_name"/></p>
+          	<p><label for ="l_name">Last Name:</label><input type="text" name="l_name" id="l_name"/></p>
+          	<p><label for ="email">Email:</label><input type="email" name="email" id="email"/></p>
+          	<p><label for ="password">Password:</label><input type="password" name="password" id="password"/></p>
+          	<p><label>Birthday:</label><input type="date" name="bday" id="bday"/></p>
+            <p><input type="submit" value="Register"/></p>
+            </ul>
+          </form>
+          <% if(messages.password) { %>
+            <h3>Wrong Password</h3>
+          <% } %>
+          <%if(messages.email) { %>
+            <h3>Wrong Email</h3>
+          <% } %>
+      <h2>Login</h2>
+        <form action="/login" method="post">
+          <ul>
+        	<label>Email:</label><input type="text" name="email"><br><br>
+        	<label>Password:</label><input type="password" name="password"><br><br>
+          <input type="submit" value="Login">
+         </ul>
+        </form>
+  </div>
+</body>
+</html>

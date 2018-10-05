@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quoting Dojo</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+  <div id="wrapper2">
+    <h1>Here are some awesome quotes!</h1>
+    <a href="/">Home</a>
+  <% for (var quote of quotes) { %>
+    <h2>"<%= quote.quote %>"</h2>
+    <h4>Author: <%= quote.name %> at <%= quote.date %> <%= quote.createdAt%> </h4>
+  <% } %>
+  </div>
+</body>
+</html>

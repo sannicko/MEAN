@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Survey Form</title>
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+  <script>
+    function goBack() {
+        window.history.back()
+    }
+    </script>
+</head>
+<body>
+    <div style="overflow-x:auto;">
+		<h2>Submitted Information</h2>
+		<p>Name: <%= data.name%></p>
+		<p>Dojo Location: <%= data.loc%></p>
+		<p>Favorite Language: <%= data.lang%></p>
+    <p>Comment: <%= data.comment%></p>
+    <button onclick="goBack()">Go Back</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+*{
+  margin:20px;
+  padding:20px;
+}
+html, body {margin:2px; padding:2px;}
+.head{
+  margin:5px;
+  
+}
+form{
+  margin:10px;
+}
+form h3{
+  margin:5px;
+}
+a{
+  margin:3px;
+}
+table, th, td, tr {
+  border: 2px solid black;
+}

@@ -1,0 +1,62 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    let search = '';
+    $('#peopleBtn').click(function(){
+        search = 'people';
+        $('#placeholder').empty();
+        $.ajax({
+            url:'/people',
+            dataType: 'json',
+            success: (data) => {
+            console.log('data from API:',data.results);
+            let people = data.results;
+            for (person of people) {
+                $('#placeholder').append(`<li>${person.name}</li>`);
+            };
+            }});
+        return false
+    });
+    $('#planetsBtn').click(function(){
+        search = 'planets'
+        $('#placeholder').empty();
+        $.ajax({
+            url:'/planets',
+            dataType: 'json',
+            success: (data) => {
+            console.log('data from API:',data.results);
+            let planets = data.results;
+            for (planet of planets) {
+                $('#placeholder').append(`<li>${planet.name}</li>`);
+            };
+            }});
+        return false
+    });
+    $('#placeholder')[0].onchange = ()=>{
+        console.log('change noted');
+    };
+});
+</script>
+<body>
+      <div>
+        <div>
+            <h1>Star Wars Wiki</h1>
+            <h2>What would you like to know more about?</h2>
+        </div>
+        <div>
+            <div>
+                <form action="/people">
+                    <button id="peopleBtn">People</button>
+                </form>
+                <form action="/planets">
+                    <button id="planetsBtn">Planets</button>
+                </form>
+            </div>
+        </div>
+        <div>
+            <div>
+                <ul id="placeholder"></ul>
+            </div>
+        </div>
+    </div>
+</body>
